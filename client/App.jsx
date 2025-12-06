@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Sidebar } from './components/Sidebar.jsx';
-import { DocumentList } from './components/DocumentList.jsx';
+import { FileExplorer } from './components/FileExplorer.jsx';
 import { DocumentViewer } from './components/DocumentViewer.jsx';
 import { apiService } from './services/api.js';
 import { Upload, Loader2 } from 'lucide-react';
@@ -189,7 +189,7 @@ function App() {
 
           <div className='mb-6 flex items-center justify-between'>
             <h3 className='text-lg font-semibold text-slate-700'>
-              Recent Uploads
+              Document Explorer
             </h3>
             <span className='text-sm text-slate-500 flex items-center bg-slate-200 px-3 py-1.5 rounded-full'>
               <Upload size={14} className='mr-1.5' />
@@ -201,23 +201,8 @@ function App() {
             <div className='flex justify-center items-center h-48'>
               <Loader2 className='animate-spin text-indigo-600' size={32} />
             </div>
-          ) : documents.length === 0 ? (
-            <div className='border-4 border-dashed border-slate-300 rounded-2xl p-16 text-center bg-white hover:border-indigo-400 hover:bg-indigo-50/30 transition-all'>
-              <div className='bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4'>
-                <Upload size={40} className='text-slate-400' />
-              </div>
-              <h3 className='text-xl font-semibold text-slate-700 mb-2'>
-                No documents yet
-              </h3>
-              <p className='text-slate-500 mb-4'>
-                Drag and drop files here or use the upload button above
-              </p>
-              <p className='text-xs text-slate-400'>
-                Supported formats: .txt, .md, .json
-              </p>
-            </div>
           ) : (
-            <DocumentList
+            <FileExplorer
               documents={documents}
               onSelect={setSelectedDoc}
               selectedId={selectedDoc?.id}
